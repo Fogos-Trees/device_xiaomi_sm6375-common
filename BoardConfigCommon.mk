@@ -54,17 +54,29 @@ BOARD_KERNEL_CMDLINE += pcie_ports=compat loop.max_part=7 iptable_raw.raw_before
 BOARD_KERNEL_CMDLINE += ip6table_raw.raw_before_defrag=1 androidboot.hab.csv=8
 BOARD_KERNEL_CMDLINE += androidboot.hab.cid=50
 BOARD_KERNEL_CMDLINE += firmware_class.path=/vendor/firmware_mnt/image
-BOARD_KERNEL_IMAGE_NAME := Image
+BOARD_KERNEL_IMAGE_NAME := Kernel
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_SEPARATED_DTBO := true
+# BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc LLVM=1
 TARGET_KERNEL_SOURCE := kernel/motorola/sm6375
 
 # Clang
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_COMPILE_WITH_MSM_KERNEL := true
-TARGET_KERNEL_CLANG_VERSION := r487747c
+# TARGET_KERNEL_CLANG_COMPILE := true
+# TARGET_COMPILE_WITH_MSM_KERNEL := true
+# TARGET_KERNEL_CLANG_VERSION := r487747c
+
+# Kernel - prebuilt
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_HEADERS := kernel/motorola/sm6375
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := device/motorola/fogos/prebuilts/Kernel
+TARGET_PREBUILT_DTB := device/motorola/fogos/prebuilts/dtb.img
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+# BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_PREBUILT_DTBOIMAGE := device/motorola/fogos/prebuilts/dtbo.img
+# BOARD_KERNEL_SEPARATED_DTBO := true
+
 
 # Platform
 BOARD_USES_QCOM_HARDWARE := true
