@@ -174,3 +174,8 @@ service blair-post-boot /vendor/bin/sh /vendor/bin/init.blair.post_boot.sh
 
 on property:vendor.post_boot.parsed=1
     start blair-post-boot
+
+on property:persist.sys.sm6375.dt2w=0
+    exec /system/bin/sendevent /dev/input/event4 0 1 4
+on property:persist.sys.sm6375.dt2w=1
+    exec /system/bin/sendevent /dev/input/event4 0 1 5
